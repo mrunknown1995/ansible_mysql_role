@@ -1,0 +1,31 @@
+
+---
+# tasks file for installation_and_configuration_mysql
+
+- name: Install MySQL for Debian
+  apt:
+     name: "{{ item }}"
+     state: latest
+  loop: 
+     - mysql-client 
+     - mysql-server
+     - python3-mysqldb
+ 
+- name: Enable MySQL for Debian
+  service:
+     name: mysql
+     state: started
+     enabled: yes
+
+- name: Change root password
+  mysql_user:
+     name: root
+     password: "{{ mysql_root_password }}"
+  ignore_errors: yes 
+      
+  
+
+
+
+
+
